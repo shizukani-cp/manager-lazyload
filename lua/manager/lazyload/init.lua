@@ -15,6 +15,7 @@ local function event(self, event_name, plugin_id, pattern)
 	vim.api.nvim_create_autocmd(event_name, {
 		group = vim.api.nvim_create_augroup(plugin_id .. "_load", { clear = true }),
 		pattern = pattern or "*",
+		once = true,
 		callback = function()
 			self:load(plugin_id)
 		end,
