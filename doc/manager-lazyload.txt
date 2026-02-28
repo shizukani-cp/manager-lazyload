@@ -1,0 +1,47 @@
+*manager-lazyload.txt* Lazy loading for manager.nvim Last Change: 2026-03-01
+
+==============================================================================
+INTRODUCTION                                        *manager-lazyload-intro*
+
+manager-lazyload is an extension for manager.nvim.
+It provides methods to lazy load plugins via keymaps or autocommands by
+injecting functions into the manager instance.
+
+==============================================================================
+SETUP                                               *manager-lazyload-setup*
+
+To use this extension, you must call the `setup` function with your manager
+instance. This will inject the lazy loading methods into the manager.
+
+>lua
+    local manager = require("manager.core").new()
+    require("manager.lazyload").setup(manager)
+<
+
+==============================================================================
+METHODS                                             *manager-lazyload-methods*
+
+After setup, the following methods are added to the manager instance:
+
+manager:lazyload_key({mode}, {lhs}, {rhs}, {id}, [{opts}])
+                                                    *manager:lazyload_key()*
+    Sets up a keymap that loads the plugin {id} when pressed.
+    Once the plugin is loaded, the keymap is updated to its original {rhs}
+    and then executed.
+
+    {mode}  (string) Map mode (e.g., "n", "i", "v").
+    {lhs}   (string) The shortcut key sequence.
+    {rhs}   (string|function) The command or function to execute.
+    {id}    (string) The plugin identifier to load.
+    {opts}  (table, optional) Map options like { silent = true }.
+
+manager:lazyload_event({event}, {id}, [{pattern}])
+                                                  *manager:lazyload_event()*
+    Sets up an |autocmd| that loads the plugin {id} when {event} occurs.
+
+    {event}   (string|table) Event name(s) (e.g., "BufReadPre").
+    {id}      (string) The plugin identifier to load.
+    {pattern} (string, optional) Pattern to match. Defaults to "*".
+
+==============================================================================
+vim:tw=78:ft=help:norl:
