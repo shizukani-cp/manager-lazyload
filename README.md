@@ -44,6 +44,12 @@ manager:lazyload_key("n", "<leader>ff", "Telescope find_files", "telescope.nvim"
 manager:lazyload_event("BufReadPost", "nvim-treesitter", "*.lua")
 ```
 
+### FileType Lazy Loading
+
+```lua
+manager:lazyload_filetype("markdown", "markdown-preview.nvim")
+```
+
 ## 📄 License
 
 MIT
