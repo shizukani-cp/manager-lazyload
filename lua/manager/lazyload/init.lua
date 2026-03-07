@@ -1,9 +1,11 @@
 ---@alias Manager.LazyloadKey fun(self: Manager, mode: string|string[], lhs: string, rhs: string|function, plugin_id: string, opts?: table)
 ---@alias Manager.LazyloadEvent fun(self: Manager, event_name: string|string[], plugin_id: string, pattern?: string|string[])
+---@alias Manager.LazyloadFileType fun(self: Manager, filetype: string|string[], plugin_id: string)
 
 ---@class Manager
 ---@field lazyload_key Manager.LazyloadKey
 ---@field lazyload_event Manager.LazyloadEvent
+---@field lazyload_filetype Manager.LazyloadFileType
 
 ---@type Manager.LazyloadKey
 local function key(self, mode, lhs, rhs, plugin_id, opts)
@@ -31,12 +33,24 @@ local function event(self, event_name, plugin_id, pattern)
     })
 end
 
+---@type Manager.LazyloadFileType
+local function filetype(self, filetype, plugin_id)
+    vim.api.nvim_create_autocmd("FileType", {
+        group = vim.api.nvim_create_augroup(plugin_id .. "_load_filetype", { clear = true }),
+        pattern = filetype,
+        callback = function()
+            self:load(plugin_id)
+        end,
+    })
+end
+
 local M = {}
 
 ---@param manager Manager
 function M.setup(manager)
     manager.lazyload_key = key
     manager.lazyload_event = event
+    manager.lazyload_filetype = filetype
 end
 
 return M
