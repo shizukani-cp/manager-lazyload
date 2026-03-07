@@ -50,5 +50,13 @@ manager:lazyload_filetype({filetype}, {id})       *manager:lazyload_filetype()*
     {filetype} (string|table) FileType(s) (e.g., "markdown")
     {id}       (string) The plugin identifier to load.
 
+
+manager:lazyload_command({command}, {id})         *manager:lazyload_command()*
+
+    sets up filetype that loads the plugin {id} when executed {command}.
+
+    {command} (string|table) Command(s) (e.g., "Manager")
+    {id}      (string) The plugin identifier to load.
+
 ==============================================================================
 vim:tw=78:ft=help:norl:

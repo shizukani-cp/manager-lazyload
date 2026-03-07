@@ -50,6 +50,12 @@ manager:lazyload_event("BufReadPost", "nvim-treesitter", "*.lua")
 manager:lazyload_filetype("markdown", "markdown-preview.nvim")
 ```
 
+### Command Lazy Loading
+
+```lua
+manager:lazyload_command("Manager", "manager-command")
+```
+
 ## 📄 License
 
 MIT
