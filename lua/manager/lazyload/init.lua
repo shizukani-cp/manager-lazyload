@@ -36,10 +36,10 @@ local function event(self, event_name, plugin_id, pattern)
 end
 
 ---@type Manager.LazyloadFileType
-local function filetype(self, filetype, plugin_id)
+local function filetype(self, ft, plugin_id)
     vim.api.nvim_create_autocmd("FileType", {
         group = vim.api.nvim_create_augroup(plugin_id .. "_load_filetype", { clear = true }),
-        pattern = filetype,
+        pattern = ft,
         callback = function()
             self:load(plugin_id)
         end,
